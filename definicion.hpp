@@ -5,6 +5,6 @@ using namespace std;
 
 void Mkdir();
 
-void ProcesarArchivo(string Ruta);
+void ProcesarArchivo(string Ruta, int Contadores[]);
 
 #endif
