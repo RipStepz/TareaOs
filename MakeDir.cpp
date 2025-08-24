@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <fstream>
 #include <regex>
+#include <string>
 #include "definicion.hpp"
 
 using namespace std;
@@ -31,6 +32,12 @@ void ProcesarArchivo(string ruta, int contadores[]){
     string linea;
     smatch match;
 
+    filesystem::path Raiz = ".";  
+    filesystem::path Output = Raiz / "Output";
+
+    
+
+
     bool flag = false;
 
     while (getline(archivo, linea)){
@@ -39,7 +46,12 @@ void ProcesarArchivo(string ruta, int contadores[]){
         if (regex_search(linea, Log)){
             
             contadores[0] += 1;
+            string Numero = to_string(contadores[0]);
+            filesystem::path Nueva_ruta = Output / "Pistas" / ("log " + Numero + ".txt");
+            filesystem::rename(ruta, Nueva_ruta);
+
             flag = true;
+            break;
             //cout<< "Encontre un archivo tipo log \n" ;
           
             
@@ -48,7 +60,12 @@ void ProcesarArchivo(string ruta, int contadores[]){
         else if (regex_search(linea, Sys)){
 
             contadores[1] += 1;
+            string Numero = to_string(contadores[1]);
+            filesystem::path Nueva_ruta = Output / "System" / "Drivers" /("Driver " + Numero + ".txt");
+            filesystem::rename(ruta, Nueva_ruta);
+
             flag = true;
+            break;
             //cout<< "Encontre un archivo tipo Sys \n" ;
            
             
@@ -57,7 +74,12 @@ void ProcesarArchivo(string ruta, int contadores[]){
         else if (regex_search(linea, Exe)){
 
             contadores[2] += 1;
+            string Numero = to_string(contadores[2]);
+            filesystem::path Nueva_ruta = Output / "System" / "Programs" /("Programa " + Numero + ".txt");
+            filesystem::rename(ruta, Nueva_ruta);
+
             flag = true;
+            break;
             //cout<< "Encontre un archivo tipo Exe \n" ;
            
             
@@ -66,7 +88,12 @@ void ProcesarArchivo(string ruta, int contadores[]){
         else if (regex_search(linea, Dll)){
 
             contadores[3] += 1;
+            string Numero = to_string(contadores[3]);
+            filesystem::path Nueva_ruta = Output / "System" / "Dynamic Link-Library" /("Dynamic Link-Library " + Numero + ".txt");
+            filesystem::rename(ruta, Nueva_ruta);
+
             flag = true;
+            break;
             //cout<< "Encontre un archivo tipo Dll \n" ;
             
             
@@ -76,10 +103,10 @@ void ProcesarArchivo(string ruta, int contadores[]){
 
     if(!flag){
         contadores[4] += 1;
+        string Numero = to_string(contadores[4]);
+        filesystem::path Nueva_ruta = Output / "Basura" /("Basura" + Numero + ".txt");
+        filesystem::rename(ruta, Nueva_ruta);
         //cout << "Encontre Basura \n";
     }
-
-    contadores[5] +=1;
-    
     
 }

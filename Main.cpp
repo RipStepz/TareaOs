@@ -32,7 +32,6 @@ int main()
     cout<< "La cantidad de Exe encontrados: " << Contadores[2] << endl;
     cout<< "La cantidad de Dll encontrados: " << Contadores[3] << endl;
     cout<< "La cantidad de basura encontrados: " << Contadores[4] << endl;
-    cout<< "Cantidad contados: " << Contadores[5] << endl;
 
     return 0;
 }
